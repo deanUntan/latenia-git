@@ -1,0 +1,56 @@
+# Logs
+*.log
+.DS_Store
+Thumbs.db
+
+# Environments & Secrets
+.env
+.env.*
+!.env.example
+*.key
+*.pem
+*.pub
+/auth.json
+oauth-private.key
+oauth-public.key
+
+# Databases (Local/Backups)
+*.sqlite
+*.sqlite3
+*.db
+*.sql
+*.sql.gz
+*.bak
+*.zip
+*.tar.gz
+*.rar
+
+# Dependencies
+/node_modules
+/vendor
+
+# IDEs & System files
+/.codex
+/.cursor/
+/.idea
+/.nova
+/.phpunit.cache
+/.vscode
+/.zed
+.phpactor.json
+.phpunit.result.cache
+_ide_helper.php
+Homestead.json
+Homestead.yaml
+
+# Laravel Public build & Storage
+/public/build
+/public/fonts-manifest.dev.json
+/public/hot
+/public/storage
+/storage/*.key
+/storage/pail
+/storage/framework/cache/data/
+/storage/framework/sessions/
+/storage/framework/views/
+/storage/logs/
