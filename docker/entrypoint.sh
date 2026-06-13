@@ -19,11 +19,10 @@ fi
 echo "Running migrations..."
 php artisan migrate --force
 
-# Optimize Laravel application (caching config, routes, views)
+# Optimize Laravel application (caching config, routes)
 echo "Caching configurations..."
 php artisan config:cache
 php artisan route:cache
-php artisan view:cache
 
 # Start supervisor (runs nginx & php-fpm)
 echo "Starting Supervisord..."
