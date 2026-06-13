@@ -1,6 +1,14 @@
 #!/bin/sh
 set -e
 
+# Ensure storage directories exist and have correct permissions
+mkdir -p /var/www/html/storage/framework/cache/data
+mkdir -p /var/www/html/storage/framework/sessions
+mkdir -p /var/www/html/storage/framework/views
+mkdir -p /var/www/html/storage/logs
+chown -R www-data:www-data /var/www/html/storage
+chmod -R 775 /var/www/html/storage
+
 # Wait for DB to be ready if environment variables are provided
 if [ -n "$DB_HOST" ]; then
     echo "Checking database connection on $DB_HOST:$DB_PORT..."
