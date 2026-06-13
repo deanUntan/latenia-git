@@ -11,7 +11,7 @@ RUN npm run build
 # ==========================================
 # Step 2: Production PHP/Nginx Environment
 # ==========================================
-FROM php:8.3-fpm-alpine
+FROM php:8.4-fpm-alpine
 
 WORKDIR /var/www/html
 
