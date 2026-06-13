@@ -8,7 +8,7 @@ if [ -n "$DB_HOST" ]; then
     i=0
     until [ $i -ge 30 ]
     do
-        nc -z -w 1 "$DB_HOST" "${DB_PORT:-3306}" && break
+        nc -z -w 1 "$DB_HOST" "${DB_PORT:-5432}" && break
         i=$((i+1))
         echo "Waiting for database to accept connections... ($i/30)"
         sleep 1

@@ -28,11 +28,12 @@ RUN apk add --no-cache \
     unzip \
     git \
     oniguruma-dev \
-    libxml2-dev
+    libxml2-dev \
+    postgresql-dev
 
 # Install PHP extensions required by Laravel
 RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
-    && docker-php-ext-install pdo_mysql mbstring zip exif pcntl bcmath gd soap
+    && docker-php-ext-install pdo_mysql pdo_pgsql pgsql mbstring zip exif pcntl bcmath gd soap
 
 # Get official Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer

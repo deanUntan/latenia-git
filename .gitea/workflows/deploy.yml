@@ -1,0 +1,23 @@
+name: Deploy Laravel to Railway
+
+on:
+  push:
+    branches:
+      - main # Jalankan otomatis setiap kali Anda push ke branch main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Tarik Kode dari Gitea
+        uses: actions/checkout@v3
+
+      - name: Install NodeJS & Railway CLI
+        run: |
+          sudo apt-get update
+          npm install -g @railway/cli
+
+      - name: Dorong Kode ke Railway
+        run: railway up --service "beautiful-tenderness"
+        env:
+          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
