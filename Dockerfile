@@ -47,6 +47,9 @@ COPY --from=node-builder /app/public/build ./public/build
 # Install composer production packages
 RUN composer install --no-dev --optimize-autoloader --no-interaction
 
+# Explicitly bind PHP-FPM to 127.0.0.1:9000 so Nginx can reach it
+RUN echo '[www]\nlisten = 127.0.0.1:9000' > /usr/local/etc/php-fpm.d/zzz-listen.conf
+
 # Set up directories & correct ownership permissions
 RUN mkdir -p /run/nginx /var/log/supervisor \
     && chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
