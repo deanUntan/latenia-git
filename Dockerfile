@@ -47,9 +47,17 @@ COPY --from=node-builder /app/public/build ./public/build
 # Install composer production packages
 RUN composer install --no-dev --optimize-autoloader --no-interaction
 
+# Explicitly bind PHP-FPM to 127.0.0.1:9000 so Nginx can reach it
+RUN printf '[www]\nlisten = 127.0.0.1:9000\n' > /usr/local/etc/php-fpm.d/zzz-listen.conf
+
 # Set up directories & correct ownership permissions
 RUN mkdir -p /run/nginx /var/log/supervisor \
     && chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
+
+# Create Laravel storage subdirectories required for view compilation and caching
+RUN mkdir -p /var/www/html/storage/framework/views \
+    /var/www/html/storage/framework/cache \
+    /var/www/html/storage/logs
 
 # Copy server & supervisor configurations
 COPY docker/nginx.conf /etc/nginx/nginx.conf
@@ -58,6 +66,6 @@ COPY docker/entrypoint.sh /usr/local/bin/entrypoint.sh
 
 RUN chmod +x /usr/local/bin/entrypoint.sh
 
-EXPOSE 80
+EXPOSE 8080
 
 ENTRYPOINT ["entrypoint.sh"]
